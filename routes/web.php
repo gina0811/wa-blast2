@@ -16,27 +16,6 @@ Route::get('/', function () {
 // Route untuk menu dashboard
 Route::get('/dashboard', [WhatsAppController::class, 'dashboard'])->name('dashboard');
 
-// Route untuk mengirim pesan WhatsApp
-Route::get('/wa/sender', [WhatsAppController::class, 'sender'])->name('wa.sender');
-
-// Route untuk menjadwalkan pesan
-Route::get('/wa/schedule', [WhatsAppController::class, 'schedule'])->name('wa.schedule');
-
-// Route untuk mengatur Auto Reply
-Route::get('/wa/auto-reply', [WhatsAppController::class, 'autoReply'])->name('wa.auto-reply');
-
-// Route untuk menyimpan kontak
-Route::get('/wa/contacts', [WhatsAppController::class, 'contacts'])->name('wa.contacts');
-
-// Route untuk menerima pesan
-Route::get('/wa/receive', [WhatsAppController::class, 'receive'])->name('wa.receive');
-
-// Route untuk pengaturan
-Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
-
-// Route untuk profil
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-
 // Route untuk halaman WhatsApp sender, schedule, auto-reply, dan lainnya
 Route::get('/wa/sender', [WhatsAppController::class, 'sender'])->name('wa.sender');
 Route::get('/wa/schedule', [WhatsAppController::class, 'schedule'])->name('wa.schedule');
@@ -46,7 +25,8 @@ Route::get('/wa/receive', [WhatsAppController::class, 'receive'])->name('wa.rece
 
 // Route untuk halaman pengaturan
 Route::get('/settings', function () {
-    return view('settings'); // Halaman pengaturan
+    return view('settings'); 
+// Halaman pengaturan
 })->name('settings');
 
 // Route untuk halaman profil

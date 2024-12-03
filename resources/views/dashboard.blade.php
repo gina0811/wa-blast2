@@ -9,31 +9,66 @@
     <div class="navbar-nav align-items-center">
         <div class="nav-item d-flex align-items-center">
         <i class="bx bx-search fs-4 lh-0"></i>
-        <input type="text" class="form-control border-0 shadow-none ps-1 ps-sm-2" placeholder="Search..." aria-label="Search...">
+        <input
+            type="text"
+            class="form-control border-0 shadow-none"
+            placeholder="Search..."
+            aria-label="Search..."
+        />
         </div>
     </div>
     <!-- /Search -->
     
-    <!-- Profile Section -->
-    <div class="profile">
-        <img src="https://i.pinimg.com/736x/5e/e1/62/5ee16212213bb8abfd4f6a8f0c71faf6.jpg" alt="Profile Picture" class="profile-picture">
-        <style>
-            /* Foto Profil di Header */
-            .profile {
-                position: absolute;
-                top: 90px; /* Jarak dari atas */
-                right: 20px; /* Jarak dari kanan */
-            }
-
-            .profile-picture {
-                width: 50px; /* Ukuran gambar */
-                height: 50px;
-                border-radius: 50%; /* Membulatkan gambar */
-                object-fit: cover; /* Memastikan gambar menyesuaikan bentuk */
-                border: 2px solid #e3e3e3; /* Border tipis */
-            }
-        </style>
-    </div>
+    <!-- User -->
+    <li class="nav-item navbar-dropdown dropdown-user dropdown">
+        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+          <div class="avatar avatar-online">
+            <img src="https://i.pinimg.com/736x/3f/09/0a/3f090aba433ce25c8cbf0e7f7ab8feb8.jpg" alt="Profile Picture" class="profile-picture" />
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" href="#">
+              <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar avatar-online">
+                    <img src="https://i.pinimg.com/736x/3f/09/0a/3f090aba433ce25c8cbf0e7f7ab8feb8.jpg" alt="Profile Picture" class="profile-picture">
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <span class="fw-semibold d-block">Mab IU</span>
+                  <small class="text-muted">Admin</small>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="bx bx-user me-2"></i>
+              <span class="align-middle">My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="bx bx-cog me-2"></i>
+              <span class="align-middle">Settings</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="auth-login-basic.html">
+              <i class="bx bx-power-off me-2"></i>
+              <span class="align-middle">Log Out</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!--/ User -->
 </div>
 
 <div class="container mt-4">
@@ -79,50 +114,40 @@
 
 <!-- Styles -->
 <style>
+    /* Foto Profil */
+    .profile-picture {
+        width: 40px; /* Lebar gambar profil */
+        height: 40px; /* Tinggi gambar profil */
+        border-radius: 50%; /* Membulatkan gambar */
+        object-fit: cover; /* Memastikan gambar menyesuaikan bentuk */
+        border: 2px solid #e3e3e3; /* Border tipis */
+    }
+
     /* Card Styling */
     .card-custom {
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1); /* Tambahkan shadow untuk estetika */
-        border-radius: 8px; /* Membulatkan sudut */
-        border: none; /* Hilangkan border bawaan */
-        padding: 0px 0px; /* Kurangi padding agar teks tidak terlalu jauh dari tepi */
-        margin-bottom: 20px; /* Jarak antar card */
-        height: auto; /* Tinggi dinamis sesuai konten */
-        text-align: justify; /* Rata tengah isi card */
+        box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        border: none;
+        padding: 15px;
+        margin-bottom: 20px;
     }
 
     .card-title {
-        font-size: 14px; /* Ukuran font judul */
-        font-weight: 600; /* Tebalkan teks judul */
-        margin-bottom: 6px; /* Jarak kecil antara judul dan isi teks */
+        font-size: 14px;
+        font-weight: 500;
+        color : green;
+        font-weight: bold;
     }
 
     .card-text {
-        font-size: 13px; /* Ukuran font teks isi */
-        color: #6c757d; /* Warna teks abu-abu */
-        margin: 0; /* Hilangkan margin tambahan */
-    }
-
-    /* Adjusting Spacing Between Cards */
-    .col-md-4 {
-        padding: 10px; /* Tambahkan padding antar kolom */
+        font-size: 12px;
+        color: #6c757d;
     }
 
     /* Gambar pada Client is Ready */
     .custom-image {
-        max-width: 140px; /* Lebar maksimal gambar */
+        max-width: 120px; /* Lebar maksimal gambar */
         height: auto; /* Proporsi gambar tetap */
-        margin-left: auto; /* Letakkan gambar di sisi kanan */
-    }
-
-    /* Card Client is Ready */
-    .card {
-        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1); /* Tambahkan shadow untuk estetika */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px; /* Kurangi padding agar lebih seragam */
-        border: 1px solid #e3e3e3;
-        border-radius: 8px;
     }
 </style>
 
