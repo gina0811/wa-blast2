@@ -4,29 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateScheduledMessagesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-
     public function up()
     {
         Schema::create('scheduled_messages', function (Blueprint $table) {
             $table->id();
             $table->string('phone_number');
             $table->text('message');
-            $table->timestamp('send_at');
-            $table->boolean('sent')->default(false);  // Menandai apakah pesan sudah terkirim
+            $table->dateTime('send_at');
+            $table->boolean('is_sent')->default(false); // Status pengiriman
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('scheduled_messages');
     }
-};
+}

@@ -2,42 +2,30 @@
 
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\ScheduledMessage;
+use App\Http\Controllers\WhatsAppController;
 
-class Kernel extends ConsoleKernel
+protected function schedule(Schedule $schedule)
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
-     */
-    protected function schedule(Schedule $schedule)
-    {
-        // Menambahkan penjadwalan otomatis
-        $schedule->call(function () {
-            // Logika untuk memeriksa dan mengirim pesan
-            $messages = \App\Models\ScheduledMessage::where('send_at', '<=', now())
-                                                      ->where('sent', false)
-                                                      ->get();
-            foreach ($messages as $message) {
-                // Mengirim pesan
-                app(\App\Http\Controllers\WhatsAppController::class)->sendMessage($message->phone_number, $message->message);
-                // Tandai pesan sebagai sudah terkirim
-                $message->sent = true;
-                $message->save();
-            }
-        })->everyMinute();  // Menjadwalkan setiap menit
-    }
+    $schedule->call(function () {
+        // Ambil pesan yang terjadwal dan belum terkirim
+        $messages = ScheduledMessage::where('send_at', '<=', now())
+                                     ->where('is_sent', false)
+                                     ->get();
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
-    protected function commands()
-    {
-        $this->load(__DIR__.'/Commands');
-    }
+        foreach ($messages as $message) {
+            // Kirim pesan menggunakan WhatsAppController
+            try {
+                app(WhatsAppController::class)->sendMessage($message->phone_number, $message->message);
+
+                // Tandai pesan sebagai terkirim
+                $message->is_sent = true;
+                $message->save();
+
+                \Log::info("Pesan terkirim ke {$message->phone_number}");
+            } catch (\Exception $e) {
+                \Log::error("Gagal mengirim pesan ke {$message->phone_number}: " . $e->getMessage());
+            }
+        }
+    })->everyMinute();
 }

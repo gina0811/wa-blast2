@@ -4,71 +4,53 @@
 
 @section('content')
 
-<div class="header bg-light py-3 px-4 d-flex justify-content-between align-items-center">
+<!-- Header -->
+<div class="header bg-light py-3 px-4 d-flex justify-content-between align-items-center shadow-sm rounded">
     <!-- Search -->
-    <div class="navbar-nav align-items-center">
-        <div class="nav-item d-flex align-items-center">
-        <i class="bx bx-search fs-4 lh-0"></i>
+    <div class="search-bar w-50 d-flex align-items-center bg-white shadow-sm px-3 rounded">
+        <i class="bx bx-search position-absolute search-icon text-muted me-2"></i>
         <input
             type="text"
             class="form-control border-0 shadow-none"
             placeholder="Search..."
-            aria-label="Search..."
+            aria-label="Search"
+            style="background-color: transparent; font-size: 14px; color: #495057;"
         />
-        </div>
     </div>
     <!-- /Search -->
-    
-    <!-- User -->
-    <li class="nav-item navbar-dropdown dropdown-user dropdown">
-        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-          <div class="avatar avatar-online">
-            <img src="https://i.pinimg.com/736x/3f/09/0a/3f090aba433ce25c8cbf0e7f7ab8feb8.jpg" alt="Profile Picture" class="profile-picture" />
-          </div>
+
+    <!-- User Profile -->
+    <div class="dropdown">
+        <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../assets/img/avatars/c.jpg" alt="Profile Picture" class="profile-picture" />
         </a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            <a class="dropdown-item" href="#">
-              <div class="d-flex">
-                <div class="flex-shrink-0 me-3">
-                  <div class="avatar avatar-online">
-                    <img src="https://i.pinimg.com/736x/3f/09/0a/3f090aba433ce25c8cbf0e7f7ab8feb8.jpg" alt="Profile Picture" class="profile-picture">
-                  </div>
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+            <li>
+                <div class="dropdown-item-text d-flex align-items-center">
+                    <img src="../assets/img/avatars/c.jpg" alt="Profile Picture" class="profile-picture me-2" />
+                    <span class="fw-semibold">D.O</span>
                 </div>
-                <div class="flex-grow-1">
-                  <span class="fw-semibold d-block">Mab IU</span>
-                  <small class="text-muted">Admin</small>
-                </div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              <i class="bx bx-user me-2"></i>
-              <span class="align-middle">My Profile</span>
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              <i class="bx bx-cog me-2"></i>
-              <span class="align-middle">Settings</span>
-            </a>
-          </li>
-          <li>
-            <div class="dropdown-divider"></div>
-          </li>
-          <li>
-            <a class="dropdown-item" href="auth-login-basic.html">
-              <i class="bx bx-power-off me-2"></i>
-              <span class="align-middle">Log Out</span>
-            </a>
-          </li>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <i class="bx bx-user me-2"></i> My Profile
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">
+                    <i class="bx bx-cog me-2"></i> Settings
+                </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item text-danger" href="#">
+                    <i class="bx bx-power-off me-2"></i> Log Out
+                </a>
+            </li>
         </ul>
-      </li>
-      <!--/ User -->
+    </div>
+    <!-- /User Profile -->
 </div>
 
 <div class="container mt-4">
@@ -84,11 +66,17 @@
         @endphp
 
         @foreach($stats as $stat)
-        <div class="col-md-3">
-            <div class="card card-custom">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <h6 class="card-title">{{ $stat['title'] }}</h6>
-                    <p class="card-text">{{ $stat['value'] }}</p>
+                  <div class="row no-gutters align-item-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        <h6 class="card-title">{{ $stat['title'] }}</h6>
+                        <p class="card-text">{{ $stat['value'] }}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -98,14 +86,14 @@
     <!-- Client is Ready Card -->
     <div class="row mt-4">
         <div class="col-md-6">
-            <div class="card d-flex align-items-center flex-row p-3">
+            <div class="card d-flex align-items-center flex-row p-3 shadow h-100">
                 <div class="me-3">
                     <h6 class="card-title text-primary">Client is Ready</h6>
                     <p class="card-text mb-2">Hello Gina WhatsApp is connected to....</p>
                     <button class="btn btn-warning">Disconnect</button>
                 </div>
                 <div class="ms-auto">
-                    <img src="https://remun.sanparama.id/storage/remuns/man-with-laptop-light.png" alt="Illustration" class="custom-image">
+                    <img src="../assets/img/illustrations/1.png" alt="Illustration" class="custom-image">
                 </div>
             </div>
         </div>
@@ -114,13 +102,57 @@
 
 <!-- Styles -->
 <style>
-    /* Foto Profil */
+    /* Header Styling */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Search Bar Styling */
+    .search-bar {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #e3e6f0;
+    }
+
+    .search-bar input {
+        flex: 1;
+        font-size: 14px;
+        color: #495057;
+    }
+
+    .search-bar i {
+        font-size: 18px;
+        color: #6c757d;
+    }
+
+    /* Profile Picture Styling */
     .profile-picture {
-        width: 40px; /* Lebar gambar profil */
-        height: 40px; /* Tinggi gambar profil */
-        border-radius: 50%; /* Membulatkan gambar */
-        object-fit: cover; /* Memastikan gambar menyesuaikan bentuk */
-        border: 2px solid #e3e3e3; /* Border tipis */
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #e3e3e3;
+    }
+
+    /* Dropdown Styling */
+    .dropdown-menu {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .dropdown-item {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .dropdown-item i {
+        font-size: 18px;
+        margin-right: 8px;
     }
 
     /* Card Styling */
@@ -133,9 +165,9 @@
     }
 
     .card-title {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 500;
-        color : green;
+        color : #2980b9;
         font-weight: bold;
     }
 
@@ -149,6 +181,7 @@
         max-width: 120px; /* Lebar maksimal gambar */
         height: auto; /* Proporsi gambar tetap */
     }
+
 </style>
 
 @endsection

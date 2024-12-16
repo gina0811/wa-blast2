@@ -12,37 +12,54 @@
             background-color: #f0f0f5;
         }
 
+        /* Sidebar Styles */
         .sidebar {
             background-color: #ffffff; /* Warna utama sidebar */
             height: 100vh;
             padding: 20px 15px;
         }
 
-        .sidebar h3 {
-            font-size: 18px;
+        /* Pusatkan logo */
+        .sidebar .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .sidebar img.logo {
+            width: 70px; /* Ukuran logo */
+            height: auto;
+        }
+
+        /* Menu Text (Sejajar dengan Link) */
+        .sidebar .menu-title {
+            color: #3498db;
+            font-size: 16px;
             font-weight: bold;
-            color: #ecf0f1;
-            margin-bottom: 20px;
+            padding: 10px 15px;
+            margin-bottom: 5px;
         }
 
         .sidebar a {
-            color: #bdc3c7; /* Warna teks */
+            color: #bdc3c7;
             padding: 10px 15px;
             display: block;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             text-decoration: none;
         }
 
         .sidebar a:hover,
         .sidebar a.active {
-            background-color: #3498db; /* Warna hover/aktif */
+            background-color: #3498db;
             color: #ffffff;
         }
 
+        /* Navbar Styles */
         .navbar {
-            background-color: #2980b9; /* Warna navbar */
+            background-color: #2980b9;
         }
 
         .navbar-brand {
@@ -51,6 +68,7 @@
             font-weight: bold;
         }
 
+        /* Content Styles */
         .content {
             background-color: #ffffff;
             min-height: 100vh;
@@ -59,8 +77,9 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Footer Styles */
         footer.footer {
-            background-color: #2980b9; /* Warna footer */
+            background-color: #2980b9;
             color: #ffffff;
             padding: 10px 0;
             position: relative;
@@ -84,7 +103,15 @@
             <div class="d-flex">
                 <!-- Sidebar -->
                 <div class="sidebar col-md-3">
-                    <h3>Menu</h3>
+                    <!-- Logo Perusahaan -->
+                    <div class="logo-container">
+                        <img src="{{ asset('assets/img/logo2.png') }}" alt="Company Logo" class="logo">
+                    </div>
+
+                    <!-- Kata "Menu" -->
+                    <div class="menu-title">Menu</div>
+
+                    <!-- Navigation Links -->
                     <ul class="nav flex-column">
                         <li><a class="nav-link @if(request()->routeIs('dashboard')) active @endif" href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li><a class="nav-link @if(request()->routeIs('wa.sender')) active @endif" href="{{ route('wa.sender') }}">WhatsApp Sender</a></li>
@@ -106,14 +133,15 @@
             <!-- Footer Section -->
             <footer class="content-footer footer bg-footer-theme">
                 <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                  <div class="mb-2 mb-md-0">
-                    ©
-                    <script>
-                      document.write(new Date().getFullYear());
-                    </script>
-                    Made With ❤️ by
-                    <a>SI PAYUNG</a>
-                  </div>
+                    <div class="mb-2 mb-md-0">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        Made With ❤️ by
+                        <a>SI PAYUNG</a>
+                    </div>
+                </div>
             </footer>
         </div>
     </div>

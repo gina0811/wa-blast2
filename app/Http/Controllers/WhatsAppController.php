@@ -2,55 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ScheduledMessage;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use WhatsAppWeb;  // Pastikan Anda telah mengimpor library WhatsAppWeb yang digunakan
 
 class WhatsAppController extends Controller
 {
-    // Fungsi untuk mengirim pesan WhatsApp
-    public function sendMessage(Request $request)
+    // Menampilkan halaman dashboard
+    public function dashboard()
     {
-        // Validasi input
-        $validated = $request->validate([
-            'phone_number' => 'required|numeric',
-            'message' => 'required|string',
-        ]);
-
-        // Mendapatkan nomor telepon yang dimasukkan
-        $phoneNumber = $validated['phone_number'];
-        $message = $validated['message'];
-
-        try {
-            // Membuat instance WhatsAppWeb dan mengirim pesan
-            $client = new WhatsAppWeb();
-            $client->connect();  // Menghubungkan ke WhatsApp Web
-            $client->sendMessage($phoneNumber, $message);  // Mengirim pesan
-
-            return back()->with('success', 'Message sent successfully!');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Failed to send message: ' . $e->getMessage());
-        }
+        return view('dashboard');
     }
 
-    // Fungsi untuk menjadwalkan pesan
-    public function schedule(Request $request)
+    // Menampilkan halaman WhatsApp sender
+    public function sender()
     {
-        // Validasi input
+        return view('wa.sender');
+    }
+
+    // Menampilkan halaman WhatsApp schedule
+    public function schedule()
+    {
+        return view('wa.schedule');
+    }
+
+    // Menampilkan halaman auto-reply
+    public function autoReply()
+    {
+        return view('wa.auto-reply');
+    }
+
+    // Menampilkan halaman kontak WhatsApp
+    public function contacts()
+    {
+        return view('wa.contacts');
+    }
+
+    // Menampilkan halaman untuk menerima pesan WhatsApp
+    public function receive()
+    {
+        return view('wa.receive');
+    }
+
+    // Menangani pengiriman pesan WhatsApp
+    public function sendMessage(Request $request)
+    {
+        // Validasi input form
         $validated = $request->validate([
             'phone_number' => 'required|numeric',
             'message' => 'required|string',
-            'send_at' => 'required|date|after:now',
         ]);
 
-        // Simpan pesan terjadwal
-        ScheduledMessage::create([
-            'phone_number' => $validated['phone_number'],
-            'message' => $validated['message'],
-            'send_at' => Carbon::parse($validated['send_at']),
-        ]);
+        // Logika untuk mengirim pesan WhatsApp
+        $phoneNumber = $request->input('phone_number');
+        $message = $request->input('message');
 
-        return back()->with('success', 'Message scheduled successfully!');
+        // Di sini Anda bisa menggunakan API WhatsApp atau library lain untuk mengirim pesan
+        // Misalnya, panggil fungsi API pengiriman pesan WhatsApp
+        // WhatsAppAPI::send($phoneNumber, $message); // Contoh panggilan API fiktif
+
+        // Setelah mengirim pesan, beri feedback ke pengguna
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }

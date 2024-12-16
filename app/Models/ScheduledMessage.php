@@ -10,10 +10,10 @@ class ScheduledMessage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'phone_number',
-        'message',
-        'send_at',
+        'phone_number', 'message', 'send_at', 'sent'
     ];
 
-    protected $dates = ['send_at']; // Menyatakan bahwa 'send_at' adalah kolom bertipe waktu
+    protected $casts = [
+        'send_at' => 'datetime',
+    ];
 }
