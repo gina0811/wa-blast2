@@ -34,7 +34,7 @@
 
         /* Menu Text (Sejajar dengan Link) */
         .sidebar .menu-title {
-            color: #3498db;
+            color: #bdc3c7;
             font-size: 16px;
             font-weight: bold;
             padding: 10px 15px;
@@ -42,7 +42,7 @@
         }
 
         .sidebar a {
-            color: #bdc3c7;
+            color: #808689;
             padding: 10px 15px;
             display: block;
             border-radius: 5px;

@@ -6,7 +6,7 @@
     <div class="card">
         <div class="card-body">
             <!-- Form -->
-            <form action="{{ route('send.message') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('wa.send.message') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Tipe Pesan -->
