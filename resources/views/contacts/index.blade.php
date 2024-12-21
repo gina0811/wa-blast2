@@ -9,7 +9,7 @@
         <div class="card-body d-flex justify-content-between align-items-center">
             <!-- Tombol Tambah Kontak -->
             <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addContactModal">Tambah Kontak</button>
-            
+
             <!-- Filter Kontak -->
             <form id="filter-form" action="{{ route('contacts.index') }}" method="GET" class="d-flex align-items-center" style="margin: 0;">
                 <label for="filter_type" class="form-label mb-0 me-2 text-secondary" style="line-height: 1.5;">Filter:</label>
@@ -24,45 +24,50 @@
         </div>
     </div>
 
-    <!-- Tabel Kontak -->
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-bordered border-1 table-hover" style="border-color: #ddd; border-radius: 8px;">
-                <thead class="table-light text-center text-dark" style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: #333; background-color: #f0f8ff;">
-                    <tr style="border-bottom: 1px solid #ddd;">
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Nomor Telepon</th>
-                        <th>Jenis Pasien</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody style="font-family: 'Verdana', sans-serif; font-size: 12px;">
-                    @forelse ($contacts as $index => $contact)
-                    <tr style="border-bottom: 1px dashed #ddd;">
-                        <td class="text-center" style="color: #000; font-weight: bold;">{{ $index + 1 }}</td>
-                        <td>{{ $contact->name }}</td>
-                        <td>{{ $contact->phone }}</td>
-                        <td>{{ $contact->type }}</td>
-                        <td>
-                            <!-- Tombol Edit -->
-                            <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus kontak ini?')">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="5" class="text-center text-danger fw-bold" style="font-family: 'Courier New', monospace; font-size: 14px;">Tidak ada kontak.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+<!-- Tabel Kontak -->
+<div class="card">
+    <div class="card-body">
+        <table class="table table-bordered border-1 table-hover" style="border-color: #ddd; border-radius: 8px;">
+            <thead class="table-light text-center text-dark" style="font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; color: #333; background-color: #f0f8ff;">
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Nomor Telepon</th>
+                    <th>Jenis Pasien</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody style="font-family: 'Verdana', sans-serif; font-size: 12px;">
+                @forelse ($contacts as $index => $contact)
+                <tr style="border-bottom: 1px dashed #ddd;">
+                    <td class="text-center" style="color: #000; font-weight: bold;">{{ ($contacts->currentPage() - 1) * $contacts->perPage() + $index + 1 }}</td>
+                    <td>{{ $contact->name }}</td>
+                    <td>{{ $contact->phone }}</td>
+                    <td>{{ $contact->type }}</td>
+                    <td>
+                        <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('contacts.destroy', $contact->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus kontak ini?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="text-center text-danger fw-bold" style="font-family: 'Courier New', monospace; font-size: 14px;">Tidak ada kontak.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        <!-- Link Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $contacts->links() }}
         </div>
     </div>
+</div>
+
 
 </div>
 

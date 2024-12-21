@@ -12,6 +12,7 @@ class CreateContactsTable extends Migration
             $table->id(); // Kolom ID auto-increment
             $table->string('name'); // Kolom Nama
             $table->string('phone'); // Kolom Telepon
+            $table->timestamps();
         });
     }
 

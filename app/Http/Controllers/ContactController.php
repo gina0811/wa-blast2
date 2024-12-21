@@ -16,7 +16,9 @@ class ContactController extends Controller
             $query->where('type', $request->filter_type);
         }
 
-        $contacts = $query->orderBy('created_at', 'desc')->get();
+        // Ubah get() menjadi paginate(10) untuk pagination
+        $contacts = $query->orderBy('created_at', 'desc')->paginate(2);
+
         return view('contacts.index', compact('contacts'));
     }
 
@@ -33,7 +35,7 @@ class ContactController extends Controller
 
         return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan.');
     }
- 
+
     // Menampilkan form tambah kontak
     public function create()
     {
