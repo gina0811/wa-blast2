@@ -47,7 +47,7 @@
                             <td colspan="4" class="text-center">Belum ada data Auto Reply.</td>
                         </tr>
                     @endforelse
-                </tbody>                
+                </tbody>
             </table>
             <div class="mt-3">
                 {{ $autoReplies->links() }}
