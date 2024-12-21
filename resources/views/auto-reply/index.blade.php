@@ -6,20 +6,16 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4 text-primary"><span class="text-muted fw-light">Page/</span> Auto Reply Management</h4>
 
-
-    <!-- Flash message -->
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
-    <!-- Tombol Action -->
     <div class="mb-3">
         <a href="{{ route('wa.auto-reply.create') }}" class="btn btn-success">Tambah Auto Reply</a>
     </div>
 
-    <!-- Tabel Auto Reply -->
     <div class="card">
         <div class="card-body">
             <table class="table table-bordered">
@@ -51,8 +47,11 @@
                             <td colspan="4" class="text-center">Belum ada data Auto Reply.</td>
                         </tr>
                     @endforelse
-                </tbody>
+                </tbody>                
             </table>
+            <div class="mt-3">
+                {{ $autoReplies->links() }}
+            </div>
         </div>
     </div>
 </div>

@@ -12,8 +12,6 @@ class CreateContactsTable extends Migration
             $table->id(); // Kolom ID auto-increment
             $table->string('name'); // Kolom Nama
             $table->string('phone'); // Kolom Telepon
-            $table->string('email')->unique(); // Kolom Email (unik)
-            $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
 

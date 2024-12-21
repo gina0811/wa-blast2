@@ -11,10 +11,10 @@ class CreateAutoRepliesTable extends Migration
         Schema::create('auto_replies', function (Blueprint $table) {
             $table->id();
             $table->string('keyword')->unique();
-            $table->string('response');
+            $table->text('response');
             $table->timestamps();
         });
-    }    
+    }       
 
     public function down()
     {
