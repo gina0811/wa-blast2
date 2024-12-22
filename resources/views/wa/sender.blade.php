@@ -42,7 +42,7 @@
                 <!-- Input Caption -->
                 <div class="mb-3" id="caption_section" style="display: none;">
                     <label class="form-label" for="caption">Caption</label>
-                    <textarea 
+                    <textarea
                         id="caption"
                         class="form-control"
                         placeholder="Write a caption here..."
@@ -52,7 +52,7 @@
                 <!-- Pesan (Untuk Teks) -->
                 <div class="mb-3" id="input_message">
                     <label class="form-label" for="data_message">Message</label>
-                    <textarea 
+                    <textarea
                         id="data_message"
                         class="form-control"
                         placeholder="Hi, Do you have a moment to talk Gina?"
