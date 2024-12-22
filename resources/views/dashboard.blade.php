@@ -44,7 +44,7 @@
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
-                <a class="dropdown-item text-danger" href="#">
+                <a class="dropdown-item text-danger" href="{{ route('logout') }}">
                     <i class="bx bx-power-off me-2"></i> Log Out
                 </a>
             </li>
