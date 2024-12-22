@@ -8,12 +8,21 @@ use App\Http\Controllers\{
     ScheduledMessageController,
     AutoReplyController,
     ContactController,
-    ReceivedMessageController
+    ReceivedMessageController,
+    AuthController
 };
+
+
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::middleware(['auth'])->group(function () {
 
 // Dashboard
 Route::get('/', [WhatsAppController::class, 'dashboard'])->name('dashboard');
-
 // Contacts (Resource Route)
 Route::resource('contacts', ContactController::class);
 Route::get('/wa/contacts', [WhatsAppController::class, 'contacts'])->name('wa.contacts');
@@ -70,3 +79,5 @@ Route::prefix('settings')->group(function () {
 
 // Profile Route
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+});
