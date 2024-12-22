@@ -10,17 +10,23 @@ class ContactController extends Controller
     // Menampilkan semua kontak
     public function index(Request $request)
     {
-        $query = ContactModel::query();
+        // Get search query and perPage value
+        $search = $request->input('search', '');
+        $perPage = $request->input('perPage', 10);
 
-        if ($request->has('filter_type') && $request->filter_type) {
-            $query->where('type', $request->filter_type);
-        }
+        // Fetch contacts with filtering and pagination
+        $contacts = ContactModel::when($search, function ($query, $search) {
+            $query->where('name', 'like', "%$search%")
+                  ->orWhere('phone', 'like', "%$search%")
+                  ->orWhere('type', 'like', "%$search%");
+        })->paginate($perPage);
 
-        // Ubah get() menjadi paginate(10) untuk pagination
-        $contacts = $query->orderBy('created_at', 'desc')->paginate(2);
+        // Preserve query string
+        $contacts->appends($request->all());
 
         return view('contacts.index', compact('contacts'));
     }
+
 
     // Menambahkan kontak baru
     public function store(Request $request)
