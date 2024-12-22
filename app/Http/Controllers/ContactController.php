@@ -13,12 +13,14 @@ class ContactController extends Controller
         // Get search query and perPage value
         $search = $request->input('search', '');
         $perPage = $request->input('perPage', 10);
+        $filterType = $request->input('filter_type', '');
 
         // Fetch contacts with filtering and pagination
         $contacts = ContactModel::when($search, function ($query, $search) {
             $query->where('name', 'like', "%$search%")
-                  ->orWhere('phone', 'like', "%$search%")
-                  ->orWhere('type', 'like', "%$search%");
+                ->orWhere('phone', 'like', "%$search%");
+        })->when($filterType, function ($query, $filterType) {
+            $query->where('type', 'like', "%$filterType%");
         })->paginate($perPage);
 
         // Preserve query string
@@ -26,7 +28,6 @@ class ContactController extends Controller
 
         return view('contacts.index', compact('contacts'));
     }
-
 
     // Menambahkan kontak baru
     public function store(Request $request)
