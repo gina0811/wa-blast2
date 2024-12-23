@@ -8,8 +8,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\WhatsAppController;
 use App\Http\Controllers\AutoReplyController;
-use App\Http\Controllers\WhatsappSenderController;
+use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\WhatsappSenderController;
 use App\Http\Controllers\ReceivedMessageController;
 use App\Http\Controllers\ScheduledMessageController;
 
@@ -23,7 +24,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Dashboard
-    Route::get('/', [WhatsAppController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('status', [DashboardController::class, 'checkStatus'])->name('status.wa');
+    Route::post('logout/wa', [DashboardController::class, 'logout'])->name('logout.wa');
+
+
 // Contacts (Resource Route)
     Route::resource('contacts', ContactController::class);
     Route::get('/wa/contacts', [WhatsAppController::class, 'contacts'])->name('wa.contacts');
@@ -53,9 +58,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/auto-reply', [WhatsAppController::class, 'autoReply'])->name('auto-reply');
         Route::get('/contacts', [WhatsAppController::class, 'contacts'])->name('contacts');
         Route::get('/receive', [WhatsAppController::class, 'receive'])->name('receive');
+
+        //untuk login logout whatsapp
+        Route::get('/', [WhatsappSenderController::class, 'index'])->name('index');
+        Route::get('/status', [WhatsappSenderController::class, 'checkStatus'])->name('status');
+        Route::post('/logout', [WhatsappSenderController::class, 'logout'])->name('logout');
     });
 
-// Schedule Message Routes
+    // Schedule Message Routes
     Route::prefix('schedule-message')->name('schedule-message.')->group(function () {
         Route::get('/', [ScheduledMessageController::class, 'index'])->name('index');
         Route::get('/create', [ScheduledMessageController::class, 'create'])->name('create');
@@ -79,13 +89,5 @@ Route::middleware(['auth'])->group(function () {
 
 // Profile Route
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-
-    Route::prefix('whatsapp')->name('whatsapp.')->group(function () {
-        // Route untuk halaman utama WhatsApp
-        Route::get('/', [WhatsappSenderController::class, 'index'])->name('index');
-
-        // Route untuk logout dari WhatsApp
-        Route::post('/logout', [WhatsappSenderController::class, 'logout'])->name('logout');
-    });
 
 });

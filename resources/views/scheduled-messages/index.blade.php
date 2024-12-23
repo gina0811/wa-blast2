@@ -77,10 +77,17 @@
                         <label for="schedule_type" class="form-label">Type</label>
                         <input type="text" name="schedule_type" class="form-control" id="schedule_type" placeholder="Type message" required>
                     </div>
+
                     <div class="mb-3">
                         <label for="number" class="form-label">Number</label>
-                        <input type="text" name="number" class="form-control" id="number" placeholder="Nomor tujuan" required>
+                        <select class="form-control" id="data_number" name="number[]" multiple="multiple">
+                            @foreach ($contacts as $contact)
+                                <option value="{{ $contact->phone }}">{{ $contact->name }} -
+                                    {{ $contact->phone }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="mb-3">
                         <label for="start_in" class="form-label">Start In</label>
                         <input type="datetime-local" name="start_in" class="form-control" id="start_in" required>

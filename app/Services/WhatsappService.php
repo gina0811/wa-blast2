@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Log;
 use GuzzleHttp\Client;
+use Log;
 
 class WhatsappService
 {
@@ -58,13 +58,15 @@ class WhatsappService
     {
         try {
             $client = new Client();
-            $url = config('app.backend') . '/api/logout';
+            $url = config('app.backend') . '/api/logout'; // Pastikan URL benar
             $response = $client->request('GET', $url, [
                 'verify' => false,
             ]);
             return true;
         } catch (\Exception $e) {
+            Log::error('Error during logout: ' . $e->getMessage());
             return false;
         }
     }
+
 }

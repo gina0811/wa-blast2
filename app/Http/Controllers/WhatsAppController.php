@@ -23,8 +23,9 @@ class WhatsAppController extends Controller
 
     public function schedule()
     {
+        $contacts = ContactModel::all();
         $scheduledMessages = ScheduledMessage::orderBy('scheduled_time', 'desc')->paginate(10);
-        return view('wa.schedule', compact('scheduledMessages'));
+        return view('wa.schedule', compact('scheduledMessages','contacts'));
     }
 
     public function autoReply()

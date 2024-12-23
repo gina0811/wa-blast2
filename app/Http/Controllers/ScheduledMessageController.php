@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactModel;
 use Illuminate\Http\Request;
 use App\Models\ScheduledMessage;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,9 @@ class ScheduledMessageController extends Controller
      */
     public function index()
     {
+        $contacts = ContactModel::all();
         $scheduledMessages = ScheduledMessage::orderBy('scheduled_time', 'desc')->paginate(10);
-        return view('scheduled-messages.index', compact('scheduledMessages'));
+        return view('scheduled-messages.index', compact('scheduledMessages', 'contacts'));
     }
 
     /**

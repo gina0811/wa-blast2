@@ -90,18 +90,23 @@ export const logoutWhatsApp = async () => {
     try {
         const cacheDir = './src/cache';
 
+        // Hapus file cache
         if (fs.existsSync(cacheDir)) {
             const files = fs.readdirSync(cacheDir);
-
             files.forEach((file) => {
                 const filePath = `${cacheDir}/${file}`;
-                fs.unlinkSync(filePath); // Delete each file
+                fs.unlinkSync(filePath);
             });
-
-            console.log('Session files cleared');
-        } else {
-            console.log('Cache directory does not exist');
         }
+
+        // Reset socket connection
+        if (sock) {
+            await sock.logout();  // Logout dari WhatsApp
+            sock = null;  // Reset socket
+        }
+
+        // Reinisialisasi koneksi
+        await connectWhatsApp();
 
         return true;
     } catch (error) {

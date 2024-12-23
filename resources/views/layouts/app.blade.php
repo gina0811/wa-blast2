@@ -121,6 +121,7 @@
                         <li><a class="nav-link @if(request()->routeIs('wa.receive')) active @endif" href="{{ route('wa.receive') }}">Receive Messages</a></li>
                         <li><a class="nav-link @if(request()->routeIs('settings')) active @endif" href="{{ route('settings') }}">Settings</a></li>
                         <li><a class="nav-link @if(request()->routeIs('profile')) active @endif" href="{{ route('profile') }}">Profile</a></li>
+                        <li><a class="nav-link @if(request()->routeIs('wa.index')) active @endif" href="{{ route('wa.index') }}">Whatsapp</a></li>
                     </ul>
                 </div>
 
@@ -128,11 +129,12 @@
                 <div class="content col-md-9">
 
                     @yield('content')
+
                 </div>
             </div>
 
             <!-- Footer Section -->
-            <footer class="content-footer footer bg-footer-theme">
+            {{-- <footer class="content-footer footer bg-footer-theme">
                 <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                     <div class="mb-2 mb-md-0">
                         ©
@@ -143,7 +145,7 @@
                         <a>SI PAYUNG</a>
                     </div>
                 </div>
-            </footer>
+            </footer> --}}
         </div>
     </div>
 
