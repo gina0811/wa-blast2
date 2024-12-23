@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\ScheduledMessage;
-use App\Models\ReceivedMessage;
 use App\Models\ContactModel;
+use App\Models\ReceivedMessage;
+use App\Models\ScheduledMessage;
+use App\Services\WhatsappService;
+use Illuminate\Http\Request;
 
 class WhatsAppController extends Controller
 {
@@ -16,7 +17,8 @@ class WhatsAppController extends Controller
 
     public function sender()
     {
-        return view('wa.sender');
+        $contacts = ContactModel::all();
+        return view('wa.sender', compact('contacts'));
     }
 
     public function schedule()
@@ -33,7 +35,7 @@ class WhatsAppController extends Controller
     public function contacts()
     {
         // Ambil semua data kontak dari database
-        $contacts = ContactModel::all(); 
+        $contacts = ContactModel::all();
         return view('wa.contacts', compact('contacts'));
     }
 
@@ -45,16 +47,18 @@ class WhatsAppController extends Controller
 
     public function sendMessage(Request $request)
     {
-        $validated = $request->validate([
-            'phone_number' => 'required|numeric',
-            'message' => 'required|string|max:500',
-        ]);
+        $bulk = [];
+        foreach ($request->number as $number) {
+            $bulk[] = [
+                "number" => $number,
+                "message" => $request->message,
+            ];
 
-        try {
-            // Logika pengiriman pesan API WhatsApp
-            return redirect()->back()->with('success', 'Message sent successfully!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to send message: ' . $e->getMessage());
         }
+
+        $whatsappService = new WhatsappService();
+        $whatsappService->sendBulkMessage(compact('bulk'));
+
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }

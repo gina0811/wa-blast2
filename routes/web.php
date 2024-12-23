@@ -1,14 +1,17 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AutoReplyController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\WhatsAppController;
+use App\Http\Controllers\AutoReplyController;
+use App\Http\Controllers\WhatsappSenderController;
+
 use App\Http\Controllers\ReceivedMessageController;
 use App\Http\Controllers\ScheduledMessageController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\WhatsAppController;use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
@@ -76,5 +79,13 @@ Route::middleware(['auth'])->group(function () {
 
 // Profile Route
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+    Route::prefix('whatsapp')->name('whatsapp.')->group(function () {
+        // Route untuk halaman utama WhatsApp
+        Route::get('/', [WhatsappSenderController::class, 'index'])->name('index');
+
+        // Route untuk logout dari WhatsApp
+        Route::post('/logout', [WhatsappSenderController::class, 'logout'])->name('logout');
+    });
 
 });

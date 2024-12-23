@@ -10,7 +10,7 @@
                 @csrf
 
                 <!-- Tipe Pesan -->
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="type-sender" class="form-label">Type</label>
                     <select class="form-select" name="type-sender" id="type-sender" aria-label="Default select example">
                         <option value="0" class="text-muted fw-light" selected>Type Sender</option>
@@ -20,12 +20,16 @@
                         <option value="document">Document</option>
                         <option value="video">Video</option>
                     </select>
-                </div>
+                </div> --}}
 
                 <!-- Nomor Tujuan -->
                 <div class="mb-3">
                     <label class="form-label" for="data_number">Number</label>
-                    <select class="form-control" id="data_number" name="number_sender[]" multiple="multiple"></select>
+                    <select class="form-control" id="data_number" name="number[]" multiple="multiple">
+                        @foreach ($contacts as $contact)
+                        <option value="{{ $contact->phone }}">{{ $contact->name }} - {{ $contact->phone }}</option>
+                        @endforeach
+                    </select>
 
                     <div class="form-check mt-2">
                         <input class="form-check-input" type="checkbox" value="" id="all_phone" />
@@ -33,30 +37,30 @@
                     </div>
                 </div>
 
-                <!-- Input File (Dinamis) -->
+                {{-- <!-- Input File (Dinamis) -->
                 <div class="mb-3" id="file_upload_section" style="display: none;">
                     <label class="form-label" for="file_upload">Upload File</label>
                     <input type="file" class="form-control" id="file_upload" name="file_upload" accept="">
-                </div>
+                </div> --}}
 
                 <!-- Input Caption -->
-                <div class="mb-3" id="caption_section" style="display: none;">
+                {{-- <div class="mb-3" id="caption_section" style="display: none;">
                     <label class="form-label" for="caption">Caption</label>
                     <textarea
                         id="caption"
                         class="form-control"
                         placeholder="Write a caption here..."
                         name="caption_sender"></textarea>
-                </div>
+                </div> --}}
 
                 <!-- Pesan (Untuk Teks) -->
                 <div class="mb-3" id="input_message">
-                    <label class="form-label" for="data_message">Message</label>
+                    <label class="form-label" for="message">Message</label>
                     <textarea
-                        id="data_message"
+                        id="message"
                         class="form-control"
                         placeholder="Hi, Do you have a moment to talk Gina?"
-                        name="message_sender"></textarea>
+                        name="message"></textarea>
                 </div>
 
                 <!-- Tombol Kirim -->
